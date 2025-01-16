@@ -72,7 +72,7 @@ public class Tallyer {
      * Tally the occurrences of valid votes for each topic from the provided lists of IDs and topics.
      * 
      * The lists are of equal length and are aligned: the id at index zero cast a vote for
-     * the topic at endex 0, the id at index 1 cast a vote for the topic at index 1, etc.
+     * the topic at index 0, the id at index 1 cast a vote for the topic at index 1, etc.
      * It returns a map where each topic is associated with the number of times it appears in the input.
      * However, any user who did not enter exactly 2 topics should not have their votes counted.
      *
@@ -84,6 +84,30 @@ public class Tallyer {
       // WAVE 2
       // TODO: Implement this method    
 
-      return null;
+      Map<String, Integer> topicCount = new HashMap<>();
+      Map<String, Integer> idCount = new HashMap<>();
+  
+      //counts IDs
+      for (String id : ids) {
+          if (idCount.containsKey(id)) {
+            idCount.put(id, idCount.get(id) + 1); 
+          } else {
+              idCount.put(id, 1);
+          }
+      }
+  
+      for (int i = 0; i < ids.size(); i++) {
+          String id = ids.get(i);
+          String topic = topics.get(i);
+  
+          if (idCount.get(id) == 2) { //checking to see if exactly 2 votes were submitted
+              if (topicCount.containsKey(topic)) {
+                topicCount.put(topic, topicCount.get(topic) + 1); //adds them to the tally if there were 2 votes
+              } else {
+                topicCount.put(topic, 1);
+              }
+          }
+      }
+      return topicCount;
   }
 }
