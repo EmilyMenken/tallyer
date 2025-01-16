@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -53,8 +54,19 @@ public class Tallyer {
         // WAVE 1
         // TODO: Implement this method
 
-        return null;
+    Map<String, Integer> topicCounts = new HashMap<>();
+
+    //gets total tallies for the topics
+    for (String topic : topics) {
+        if (topicCounts.containsKey(topic)) {
+            topicCounts.put(topic, topicCounts.get(topic) + 1); //adds 1 to the counter if we already have the topic
+        } else {
+            topicCounts.put(topic, 1); //adds topic to the counter if we don't have it in there yet
+        }
     }
+
+    return topicCounts;
+}
 
     /**
      * Tally the occurrences of valid votes for each topic from the provided lists of IDs and topics.
@@ -70,7 +82,7 @@ public class Tallyer {
      */
     public static Map<String, Integer> tallyTopicsFiltered(List<String> ids, List<String> topics) {
       // WAVE 2
-      // TODO: Implement this method
+      // TODO: Implement this method    
 
       return null;
   }
